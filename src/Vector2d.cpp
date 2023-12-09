@@ -4,7 +4,7 @@
 #include <string>
 
 // Constructors and equality
-Vector2d::Vector2d(double x, double y) {
+Vector2d::Vector2d(int x, int y) {
 	this->x = x;
 	this->y = y;
 }
@@ -17,6 +17,16 @@ Vector2d& Vector2d::set(Vector2d vector) {
 	this->y = vector.y;
 	return *this;
 }
+Vector2d& Vector2d::operator=(Vector2d& vector) {
+	this->x = vector.x;
+	this->y = vector.y;
+	return *this;
+}
+Vector2d& Vector2d::operator=(Vector2d vector) {
+	this->x = vector.x;
+	this->y = vector.y;
+	return *this;
+}
 bool operator==(const Vector2d& vectorA, const Vector2d& vectorB) {
 	return Vector2d::approximatelyEqual(vectorA.x, vectorB.x) && Vector2d::approximatelyEqual(vectorA.y, vectorB.y);
 }
@@ -25,10 +35,10 @@ bool operator==(const Vector2d& vectorA, const Vector2d& vectorB) {
 Vector2d operator+(const Vector2d& vectorA, const Vector2d& vectorB) {
 	return { vectorA.x + vectorB.x, vectorA.y + vectorB.y };
 }
-Vector2d operator+(const Vector2d& vector, const double scalar) {
+Vector2d operator+(const Vector2d& vector, const int scalar) {
 	return { vector.x + scalar, vector.y + scalar };
 }
-Vector2d operator+(const double scalar, const Vector2d& vector) {
+Vector2d operator+(const int scalar, const Vector2d& vector) {
 	return vector + scalar;
 }
 Vector2d& operator+=(Vector2d& vectorA, const Vector2d& vectorB) {
@@ -41,10 +51,10 @@ Vector2d& operator+=(Vector2d& vectorA, const Vector2d& vectorB) {
 Vector2d operator-(const Vector2d& vectorA, const Vector2d& vectorB) {
 	return { vectorA.x - vectorB.x, vectorA.y - vectorB.y };
 }
-Vector2d operator-(const Vector2d& vector, const double scalar) {
+Vector2d operator-(const Vector2d& vector, const int scalar) {
 	return { vector.x - scalar, vector.y - scalar };
 }
-Vector2d operator-(const double scalar, const Vector2d& vector) {
+Vector2d operator-(const int scalar, const Vector2d& vector) {
 	return vector - scalar;
 }
 Vector2d& operator-=(Vector2d& vectorA, const Vector2d& vectorB) {
@@ -60,10 +70,10 @@ Vector2d Vector2d::operator-() const {
 Vector2d operator*(const Vector2d& vectorA, const Vector2d& vectorB) {
 	return { vectorA.x * vectorB.x, vectorA.y * vectorB.y };
 }
-Vector2d operator*(const Vector2d& vector, const double scalar) {
+Vector2d operator*(const Vector2d& vector, const int scalar) {
 	return { vector.x * scalar, vector.y * scalar };
 }
-Vector2d operator*(const double scalar, const Vector2d& vector) {
+Vector2d operator*(const int scalar, const Vector2d& vector) {
 	return vector * scalar;
 }
 
@@ -71,10 +81,10 @@ Vector2d operator*(const double scalar, const Vector2d& vector) {
 Vector2d operator/(const Vector2d& vectorA, const Vector2d& vectorB) {
 	return { vectorA.x / vectorB.x, vectorA.y / vectorB.y };
 }
-Vector2d operator/(const Vector2d& vector, const double scalar) {
+Vector2d operator/(const Vector2d& vector, const int scalar) {
 	return vector * (1 / scalar);
 }
-Vector2d operator/(const double scalar, const Vector2d& vector) {
+Vector2d operator/(const int scalar, const Vector2d& vector) {
 	return { scalar / vector.x, scalar / vector.y };
 }
 
@@ -90,12 +100,12 @@ Vector2d Vector2d::normalize() const {
 	if (length == 0) {
 		length = 1;
 	}
-	return { this->x / length, this->y / length };
+	return { static_cast<int>(this->x / length), static_cast<int>(this->y / length) };
 }
-double Vector2d::dot(Vector2d& vector) const {
+int Vector2d::dot(Vector2d& vector) const {
 	return this->x * vector.x + this->y * vector.y;
 }
-double Vector2d::cross(Vector2d& vector) const {
+int Vector2d::cross(Vector2d& vector) const {
 	return this->x * vector.y - this->y * vector.x;
 }
 

@@ -42,3 +42,24 @@ int Simulation::getWidth() {
 int Simulation::getHeight() {
 	return this->height;
 }
+void clear() {
+    // CSI[2J clears screen, CSI[H moves the cursor to top-left corner
+    std::cout << "\x1B[2J\x1B[H";
+}
+void Simulation::render() {
+	int simWidth = this->getWidth();
+	int simHeight = this->getHeight();
+	clear();
+	for (int y = 0; y < simHeight; ++y) {
+		for (int x = 0; x < simWidth; ++x) {
+			Particle* particle = this->at({ x, y });
+			if (particle) {
+				std::cout << " # ";
+			}
+			else {
+				std::cout << " . ";
+			}
+		}
+		std::cout << '\n';
+	}
+}

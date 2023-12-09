@@ -10,6 +10,9 @@ protected:
 	int lastUpdateTick;
 	Vector2d position;
 	Simulation* simulation;
+	bool tryMove(Vector2d nextPosition);
+	Vector2d& clampPosition(Vector2d& position);
+	bool withinBounds(Vector2d position);
 public:
 	Particle(Simulation* sim, Vector2d pos);
 	void update(int tick);

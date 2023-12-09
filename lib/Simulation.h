@@ -18,6 +18,7 @@ public:
 
 	int getWidth();
 	int getHeight();
+	void render();
 };
 
 #endif
