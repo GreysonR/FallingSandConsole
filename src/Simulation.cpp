@@ -46,18 +46,22 @@ void clear() {
     // CSI[2J clears screen, CSI[H moves the cursor to top-left corner
     std::cout << "\x1B[2J\x1B[H";
 }
-void Simulation::render() {
+void Simulation::render(Vector2d& cursor) {
 	int simWidth = this->getWidth();
 	int simHeight = this->getHeight();
 	clear();
 	for (int y = 0; y < simHeight; ++y) {
 		for (int x = 0; x < simWidth; ++x) {
-			Particle* particle = this->at({ x, y });
-			if (particle) {
+			Vector2d position { x, y };
+			Particle* particle = this->at(position);
+			if (position == cursor) {
+				std::cout << " + ";
+			}
+			else if (particle) {
 				std::cout << " # ";
 			}
 			else {
-				std::cout << " . ";
+				std::cout << "   ";
 			}
 		}
 		std::cout << '\n';

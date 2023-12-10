@@ -18,7 +18,7 @@ public:
 
 	int getWidth();
 	int getHeight();
-	void render();
+	void render(Vector2d& cursor);
 };
 
 #endif
