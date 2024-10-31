@@ -6,10 +6,10 @@
 
 class Simulation {
 private:
-	std::vector<std::vector<Particle*>> world; // world[x][y]
+	std::vector<std::vector<Particle*>> world; // world[x][y]; 2d vector of particle pointers
 	int width;
 	int height;
-	int tick;
+	int tick; // simulation tick number, aka how many times update has been called; Used to make sure particles are updated in correct order
 public:
 	Simulation(const int width, const int height);
 	Particle*& at(Vector2d position);

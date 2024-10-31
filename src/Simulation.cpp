@@ -3,7 +3,7 @@
 #include "Particle.h"
 #include "Simulation.h"
 
-using vectorSize = std::vector<Particle*>::size_type;
+using vectorSize_t = std::vector<Particle*>::size_type;
 
 Simulation::Simulation(const int width, const int height) {
 	this->width = width;
@@ -11,13 +11,13 @@ Simulation::Simulation(const int width, const int height) {
 	this->tick = 0;
 
 
-	this->world.resize(static_cast<vectorSize>(width));
+	this->world.resize(static_cast<vectorSize_t>(width));
 	for (int i = 0; i < static_cast<int>(world.size()); ++i) {
-		this->world.at(i).resize(static_cast<vectorSize>(height));
+		this->world.at(i).resize(static_cast<vectorSize_t>(height));
 	}
 }
 Particle*& Simulation::at(Vector2d position) {
-	return this->world[static_cast<vectorSize>(position.x)][static_cast<vectorSize>(position.y)];
+	return this->world[static_cast<vectorSize_t>(position.x)][static_cast<vectorSize_t>(position.y)];
 }
 void Simulation::update() {
 	for (std::vector<Particle*> row : this->world) {
